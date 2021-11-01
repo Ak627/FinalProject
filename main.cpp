@@ -161,7 +161,7 @@ int main() {
 			if (input == 'E')
 				room = 10;
 			else if (input == 'N')
-				std::cout << "You stop as you go back through the villagers paht, you can't go back now after what they did for you.\n";
+				std::cout << "You stop as you go back through the villagers path, you can't go back now after what they did for you.\n";
 			else if (input == 'q') {
 				MessageBox(nullptr, TEXT("YOU QUIT."), TEXT("Thanks for playing."), MB_OK);
 				return 0;
