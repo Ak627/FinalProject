@@ -76,11 +76,11 @@ int main() {
 			if (input.compare("pick up") == 4)
 				Inventory[4] = "small coin";
 			cin >> input;
-			if (input == "S")
+			if (input == "South")
 				room = 5;
-			else if (input == "E")
+			else if (input == "East")
 				room = 6;
-			else if (input == "W")
+			else if (input == "West")
 				room = 2;
 			else if (input == "q") {
 				MessageBox(nullptr, TEXT("YOU QUIT."), TEXT("Thanks for playing."), MB_OK);
@@ -115,14 +115,14 @@ int main() {
 			cout << "The light is a very lovely looking fountain filled with mystical creatures." << std::endl;
 			cout << "The creatures seem very interested in you, would you like to Stay or keep heading East?" << std::endl;
 			cin >> input;
-			if (input == "S") {
+			if (input == "Stay") {
 				system("COLOR 48");
 				MessageBox(nullptr, TEXT("YOU DIED."), TEXT("The creatures were hungry."), MB_OK);
 				return 0;
 			}
-			else if (input == "E")
+			else if (input == "East")
 				room = 11;
-			else if (input == "W")
+			else if (input == "West")
 				room = 4;
 			else if (input == "q") {
 				MessageBox(nullptr, TEXT("YOU QUIT."), TEXT("Thanks for playing."), MB_OK);
@@ -137,13 +137,13 @@ int main() {
 			cout << "There are three different paths North, South, and West.\n";
 			cout << "Which way shall you go?\n";
 			cin >> input;
-			if (input == "N")
+			if (input == "North")
 				room = 17;
-			else if (input == "S")
+			else if (input == "South")
 				room = 14;
-			else if (input == "W")
+			else if (input == "West")
 				room = 16;
-			else if (input == "E")
+			else if (input == "East")
 				room = 3;
 			else if (input == "q") {
 				MessageBox(nullptr, TEXT("YOU QUIT."), TEXT("Thanks for playing."), MB_OK);
@@ -157,9 +157,9 @@ int main() {
 			cout << "They guide you to a path to what they call Mystical Treasure\n";
 			cout << "As you go down their path you see a flower plains to the South.\n";
 			cin >> input;
-			if (input == "S")
+			if (input == "South")
 				room = 9;
-			else if (input == "N")
+			else if (input == "North")
 				cout << "The villagers don't want you to return they wish for you to keep going on your adventure.\n";
 			else if (input == "q") {
 				MessageBox(nullptr, TEXT("YOU QUIT."), TEXT("Thanks for playing."), MB_OK);
@@ -172,9 +172,9 @@ int main() {
 			cout << "You walk into a flower plain, there are many beautiful flowers.\n";
 			cout << "To the East there is more fields of flowers with some objects in the distance.\n";
 			cin >> input;
-			if (input == "E")
+			if (input == "East")
 				room = 10;
-			else if (input == "N")
+			else if (input == "North")
 				cout << "You stop as you go back through the villagers paht, you can't go back now after what they did for you.\n";
 			else if (input == "q") {
 				MessageBox(nullptr, TEXT("YOU QUIT."), TEXT("Thanks for playing."), MB_OK);
