@@ -4,9 +4,12 @@
 using namespace std;
 
 void Monsters();
+void Shop();
+int health = 100;
+int coins = 0;
+string Inventory[10] = { "wool shirt","wool pants","animal skin shoes","sharpened stick" };
 
 int main() {
-	string Inventory[10] = { "wool shirt","wool pants","animal skin shoes","sharpened stick"};
 	int room = 1;
 	string input;
 	system("title The Lost Adventurer");
@@ -16,9 +19,10 @@ int main() {
 	do {
 		cout << "Inventory: ";
 		for (int i = 0; i < 10; i++)
-			cout << Inventory[i] << " , ";
+			cout << Inventory[i] << " | ";
 		cout << endl;
-
+		cout << "Health: " << health << endl;
+		cout << "Coin Count: " << coins << endl;
 		switch (room) {
 		case 1:
 			system("COLOR 2B");
@@ -71,10 +75,7 @@ int main() {
 		case 4:
 			system("COLOR 0B");
 			cout << "You head East and hike up a small mountain that goes above the tree tops." << endl;
-			cout << "While standing on the mountain you see village further South as well as a light more to the East." << endl << endl;
-			cout << "You see a small coin on the ground: ";
-			if (input.compare("pick up") == 0)
-				Inventory[4] = "small coin";
+			cout << "While standing on the mountain you see village further South as well as a light more to the East." << endl;
 			cin >> input;
 			if (input == "South")
 				room = 5;
@@ -115,17 +116,10 @@ int main() {
 			cout << "The light is a very lovely looking fountain filled with mystical creatures." <<  endl;
 			cout << "The creatures seem very interested in you, would you like to Stay or keep heading East?" <<  endl;
 			cin >> input;
-			if (input.compare("Stay")) {
-				if (Inventory[4].compare("small coin") != 0) {
+			if (input == "Stay") {
 					system("COLOR 48");
 					MessageBox(nullptr, TEXT("YOU DIED."), TEXT("The creatures were hungry."), MB_OK);
 					return 0;
-				}
-				else {
-					cout << "The Creatures are very interested in the small coin you picked up earlier." << endl;
-					cout << "They take the coin and lead you to a secret area underneath the fountain." << endl;
-					room = 24;
-				}
 			}
 			else if (input == "East")
 				room = 11;
@@ -174,6 +168,7 @@ int main() {
 			}
 			else
 				cout << "You stand there aimlessly.\n";
+			break;
 		case 9:
 			system("COLOR 2D");
 			cout << "You walk into a flower plain, there are many beautiful flowers.\n";
@@ -189,10 +184,109 @@ int main() {
 			}
 			else
 				cout << "You just stand there.\n";
+			break;
+		case 10:
+			system("COLOR 2D");
+			cout << "You walk further into the flower plains and see a path South,West, and more East.\n";
+			cin >> input;
+			if (input == "South ")
+				room = 24;
+			else if (input == "East")
+				room = 12;
+			else if (input == "West")
+				room = 9;
+			else if (input == "q") {
+				MessageBox(nullptr, TEXT("YOU QUIT."), TEXT("Thanks for playing."), MB_OK);
+				return 0;
+			}
+			else
+				cout << "Nothing happens.\n";
+			break;
+		case 11:
+			system("COLOR 2C");
+			cout << "You move past the fountain, there is a path South and West.\n";
+			cin >> input;
+			if (input == "South")
+				room = 20;
+			else if (input == "West")
+				room = 6;
+			else if (input == "q") {
+				MessageBox(nullptr, TEXT("YOU QUIT."), TEXT("Thanks for playing."), MB_OK);
+				return 0;
+			}
+			else
+				cout << "Nothing happens.\n";
+			break;
+		case 12:
+			system("COLOR 2B");
+			cout << "You walk up to a docks, there is a bridge that goes further East, and a path back West.\n";
+			cin >> input;
+			if (input == "East")
+				room = 13;
+			else if (input == "West")
+				room = 10;
+			else if (input == "q") {
+				MessageBox(nullptr, TEXT("YOU QUIT."), TEXT("Thanks for playing."), MB_OK);
+				return 0;
+			}
+			else
+				cout << "Nothing happens\n";
+			break;
+		case 13:
+			system("COLOR 18");
+			cout << "You walk across the docks and find yourself at a small shop.\n";
+			cout << "Would you like to enter Y/N?\n";
+			cin >> input;
+			if (input == "Y")
+				Shop();
+			else if (input == "N")
+				room = 12;
+			else if (input == "q") {
+				MessageBox(nullptr, TEXT("YOU QUIT."), TEXT("Thanks for playing."), MB_OK);
+				return 0;
+			}
+			else
+				cout << "Nothing happens.\n";
+			break;
+		case 14:
+			system("COLOR 0F");
+			cout << "You go South, there is an opening to the West and a path back North.\n";
+			cout << "A strange light seeps through from the West.\n";
+			cin >> input;
+			if (input == "West")
+				room = 21;
+			else if (input == "North")
+				room = 7;
+			else if (input == "q") {
+				MessageBox(nullptr, TEXT("YOU QUIT."), TEXT("Thanks for playing."), MB_OK);
+				return 0;
+			}
+			else
+				cout << "It's cold and dark, nothing happens.\n";
+			break;
+		case 15:
+			break;
+		case 16:
+			break;
+		case 17:
+			break;
+		case 18:
+			break;
+		case 19:
+			break;
+		case 20:
+			break;
+		case 21:
+			break;
+		case 22:
+			break;
+		case 23:
+			break;
+		case 24:
+			break;
 		}
 	} while (input != "q");
 }
-
 void Monsters() {
 	int num = rand() % 100 + 1;
 	if (num <= 20)
@@ -202,5 +296,28 @@ void Monsters() {
 	else if (num <= 90)
 		cout << "A group of goblins raid you!" << endl << endl;
 	else
-		cout << "Nothing happens..." << endl << endl;
+		cout << "Nothing happens, it's quiet..." << endl << endl;
+}
+void Shop() {
+
+	string input;
+	do {
+		cout << "Hello! Welcome to my shop!" << endl;
+		cout << "Press 'p' for a potion, 's' for a sword, and 'm' for magic wand. To exit the shop press 'q'." << endl;
+		cin >> input;
+		if (input == "p") {
+			Inventory[4] = "potion";
+			cout << "You got a potion" << endl;
+		}
+		else if (input == "s") {
+			Inventory[5] = "sword";
+			cout << "You got a sword." << endl;
+		}
+		else if (input == "m") {
+			Inventory[6] = "magic wand";
+			cout << "You got a magic wand." << endl;
+		}
+		else if (input == "q")
+			cout << "Goodbye hope to see you again soon!" << endl;
+	} while (input != "q");
 }
