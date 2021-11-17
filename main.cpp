@@ -1,12 +1,13 @@
 #include<iostream>
 #include<Windows.h>
 #include<ctime>
+#include<string>
 using namespace std;
 
 void Bosses();
 void Monsters();
 void Shop();
-void battle(int BossHealth);
+void battle(int BossHealth, char Btype);
 
 int health = 100;
 int coins = 10;
@@ -14,6 +15,7 @@ int turns = 0;
 string Inventory[10] = { "wool shirt","wool pants","animal skin shoes"};
 
 int main() {
+	srand(time(NULL));
 	int room = 1;
 	string input;
 	system("title The Lost Adventurer");
@@ -48,7 +50,7 @@ int main() {
 			system("COLOR 2F");
 			cout << "You head North and find yourself near a pond." << endl;
 			cout << "There is a sharpened stick you find on the floor, you have a feeling it might be useful. You pick it up." << endl;
-			Inventory[3] = "sharpened stick";
+			Inventory[3] = "sharpenedstick";
 			cout << "There is a path to the West as well as a hike to the East." << endl;
 			cin >> input;
 			if (input == "West")
@@ -85,8 +87,12 @@ int main() {
 			system("COLOR 0B");
 			cout << "You head East and hike up a small mountain that goes above the tree tops." << endl;
 			cout << "While standing on the mountain you see village further South as well as a light more to the East." << endl;
+			if (Inventory[5] != "small coin") {
+				cout << "You pick up a small coin you found on the ground." << endl;
+				Inventory[5] = "small coin";
+			}
 			cin >> input;
-			if (input == "South")
+			 if (input == "South")
 				room = 5;
 			else if (input == "East")
 				room = 6;
@@ -116,6 +122,8 @@ int main() {
 				MessageBox(nullptr, TEXT("YOU QUIT."), TEXT("Thanks for playing."), MB_OK);
 				return 0;
 			}
+			else if (input == "North")
+				room = 4;
 			else
 				cout << "You stand there awkwardly with the villagers" << endl;
 			break;
@@ -125,10 +133,14 @@ int main() {
 			cout << "The light is a very lovely looking fountain filled with mystical creatures." << endl;
 			cout << "The creatures seem very interested in you, would you like to Stay or keep heading East?" << endl;
 			cin >> input;
-			if (input == "Stay") {
-				system("COLOR 48");
-				MessageBox(nullptr, TEXT("YOU DIED."), TEXT("The creatures were hungry."), MB_OK);
-				return 0;
+			if (input.compare("Stay")) {
+				if (Inventory[5].compare("small coin") != 0) {
+					system("COLOR 48");
+					MessageBox(nullptr, TEXT("YOU DIED."), TEXT("The creatures were hungry."), MB_OK);
+					return 0;
+				}
+				else
+					room = 23;
 			}
 			else if (input == "East")
 				room = 11;
@@ -146,6 +158,7 @@ int main() {
 			cout << "You enter the cave it is dark and cold.\n";
 			cout << "There are three different paths North, South, and West.\n";
 			cout << "Which way shall you go?\n";
+			if(Inventory)
 			cin >> input;
 			if (input == "North")
 				room = 17;
@@ -212,7 +225,7 @@ int main() {
 				cout << "Nothing happens.\n";
 			break;
 		case 11:
-			system("COLOR 2C");
+			system("COLOR 2F");
 			cout << "You move past the fountain, there is a path South and West.\n";
 			cin >> input;
 			if (input == "South")
@@ -242,7 +255,7 @@ int main() {
 				cout << "Nothing happens\n";
 			break;
 		case 13:
-			system("COLOR 18");
+			system("COLOR 1F");
 			cout << "You walk across the docks and find yourself at a small shop.\n";
 			cout << "Would you like to enter Y/N?\n";
 			cin >> input;
@@ -369,6 +382,11 @@ int main() {
 		case 22:
 			break;
 		case 23:
+			system("COLOR 0E");
+			cout << "These creatures loved the coin you had an lead you to their secret treasure, a room filled with gold, they tell you that you can take whatever you want." << endl;
+			coins += 150;
+			cout << "After they lead you over to the village so you can complete your journey." << endl;
+			room = 5;
 			break;
 		case 24:
 			system("COLOR 4E");
@@ -398,17 +416,17 @@ void Monsters() {
 		health -= 10;
 		cout << "You get hit for 10 hp." << endl << endl;
 	}
-	else if (num <= 35) {
+	else if (num <= 75) {
 		cout << "a zombie appears and bites you at an attempt to eat your brains!" << endl;
 		health -= healthsub;
 		cout << "You get hit for " << healthsub << " hp." << endl << endl;
 	}
-	else if (num <= 20) {
+	else if (num <= 90) {
 		cout << "A group of goblins raid you and steal all your coins!" << endl;
 		coins -= coins;
 		cout << "You have 0 coins now." << endl << endl;
 	}
-	else if (num <= 5) {
+	else if (num <= 95) {
 		cout << "A group of cave fairies give you some coins and heal you by 50 hp." << endl;
 		coins += 25;
 		health += 50;
@@ -418,10 +436,10 @@ void Monsters() {
 		cout << "Nothing happens, it's quiet..." << endl << endl;
 }
 void Shop() {
-
+	cout << "Hello my friend! Welcome to my shop!" << endl;
 	string input;
 	do {
-		cout << "Hello my friend! Welcome to my shop!" << endl;
+		cout << "Coins: " << coins << endl;
 		cout << "Enter 'p' for a potion for 20 coins, 's' for a sword for 25 coins, 'hc' for heavy chestplate for 30 coins, 'hl' for heavy leggings for 25 coins, 'hb' for heavy boots for 20 coins. To exit the shop press 'q'." << endl;
 		cin >> input;
 		if (input == "p"  && coins >=20) {
@@ -468,32 +486,41 @@ void Bosses() {
 	int num = rand() % 100 + 1;
 	if (num <= 20) {
 		cout << "You encounter the Large Cave Orc gaurding the treasure!" << endl;
-		battle(50);
+		battle(50, 'o');
 	}
 	else if (num <= 60) {
 		cout << "You encounter the Hydra that is the keeper of the treauser!" << endl;
-		battle(65);
+		battle(65, 'h');
 	}
 	else {
 		cout << "The Cyclops of the treasure appears before you!" << endl;
-		battle(30);
+		battle(30, 'c');
 	}
 }
 
-void battle(int BossHealth) {
+void battle(int BossHealth, char Btype) {
 	int damage;
 	string input;
 	while (BossHealth > 0 && health > 0) {
-		damage = rand() % 31 + 20;
+		if (Btype == 'h')
+			damage = rand() % 31 + 20;
+		else if (Btype == 'o')
+			damage = rand() % 21 + 20;
+		else
+			damage = rand() % 16 + 20;
 		cout << "The monster hits you for " << damage << " damage" << endl;
 		health -= damage;
 		cout << "You have " << health << " health left" << endl;
 		cout << "Your turn to attack, you can swipe or kick." << endl;
 		cin >> input;
+		if (Inventory[3] == "shapenedstick")
+			damage * .1;
+		else if (Inventory[3] == "sword")
+			damage * 2;
 		if (input == "swipe")
-			damage = rand() % 16 + 10;
+			damage = rand() % 7 + 10;
 		else if (input == "kick")
-			damage = rand() % 11 + 5;
+			damage = rand() % 7 + 5;
 		cout << "You hit the monster for " << damage << " damage" << endl;
 		BossHealth -= damage;
 		cout << "The Boss has " << BossHealth << " health." << endl;
