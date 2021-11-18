@@ -8,6 +8,7 @@ void Bosses();
 void Monsters();
 void Shop();
 void battle(int BossHealth, char Btype);
+void NPC(int ctype);
 
 int health = 100;
 int coins = 10;
@@ -17,12 +18,14 @@ string Inventory[10] = { "wool shirt","wool pants","animal skin shoes"};
 int main() {
 	srand(time(NULL));
 	int room = 1;
+	int num;
 	string input;
 	system("title The Lost Adventurer");
 	cout << "You wake up and find yourself in a mysterious forest. Can you figure out the way out? Will you find the treasure that is rumoured to be in this forest? Good luck adventurer have fun." << endl;
 	cout << "You see an opening through the trees." << endl;
 	cout << "(To quit at any point in the game enter q)\n";
 	do {
+		num = rand() % 4 + 1;
 		cout << "Inventory: ";
 		for (int i = 0; i < 10; i++)
 			cout << Inventory[i] << " | ";
@@ -49,9 +52,11 @@ int main() {
 		case 2:
 			system("COLOR 2F");
 			cout << "You head North and find yourself near a pond." << endl;
-			cout << "There is a sharpened stick you find on the floor, you have a feeling it might be useful. You pick it up." << endl;
-			Inventory[3] = "sharpenedstick";
 			cout << "There is a path to the West as well as a hike to the East." << endl;
+			if (Inventory[3] != "sharpenedstick") {
+				cout << "There is a sharpened stick you find on the floor, you have a feeling it might be useful. You pick it up." << endl;
+				Inventory[3] = "sharpenedstick";
+			}
 			cin >> input;
 			if (input == "West")
 				room = 3;
@@ -140,7 +145,7 @@ int main() {
 					return 0;
 				}
 				else
-					room = 23;
+					room = 22;
 			}
 			else if (input == "East")
 				room = 11;
@@ -176,6 +181,7 @@ int main() {
 				cout << "You stand in the dark and cold. Please choose a path.\n";
 			break;
 		case 8:
+			system("COLOR 1E");
 			cout << "The villagers find your kindness very respectable\n";
 			cout << "They guide you to a path to what they call Mystical Treasure\n";
 			cout << "As you go down their path you see a flower plains to the South.\n";
@@ -194,6 +200,7 @@ int main() {
 		case 9:
 			system("COLOR 2D");
 			cout << "You walk into a flower plain, there are many beautiful flowers.\n";
+			NPC(num);
 			cout << "To the East there is more fields of flowers with some objects in the distance.\n";
 			cin >> input;
 			if (input == "East")
@@ -209,10 +216,12 @@ int main() {
 			break;
 		case 10:
 			system("COLOR 2D");
-			cout << "You walk further into the flower plains and see a path South,West, and more East.\n";
+			cout << "You walk further into the flower plains with many more beautiful and vibrant flowers." << endl;
+			NPC(num);
+			cout << "You see a path South, West, and further East.\n";
 			cin >> input;
 			if (input == "South")
-				room = 24;
+				room = 23;
 			else if (input == "East")
 				room = 12;
 			else if (input == "West")
@@ -240,7 +249,7 @@ int main() {
 				cout << "Nothing happens.\n";
 			break;
 		case 12:
-			system("COLOR 2B");
+			system("COLOR 2F");
 			cout << "You walk up to a docks, there is a bridge that goes further East, and a path back West.\n";
 			cin >> input;
 			if (input == "East")
@@ -322,9 +331,9 @@ int main() {
 			if (input == "South")
 				room = 7;
 			else if (input == "West")
-				room = 22;
+				room = 18;
 			else
-				cout << "It's cold and darl. Nothing happens." << endl;
+				cout << "It's cold and dark. Nothing happens." << endl;
 			break;
 		case 18:
 			system("COLOR 0F");
@@ -353,7 +362,9 @@ int main() {
 				cout << "It's cold and dark, nothing happens.\n";
 			break;
 		case 20:
-			cout << "You have went South, there are so many trees around you only see paths to the East and the North." << endl;
+			cout << "You have went South, there are many many trees blocking paths around you." << endl;
+			NPC(num);
+			cout << "The only paths you see are East and North." << endl;
 			cin >> input;
 			if (input == "East") {
 				system("COLOR 48");
@@ -380,19 +391,17 @@ int main() {
 				cout << "You stand there mesmerized by the portal." << endl;
 			break;
 		case 22:
-			break;
-		case 23:
 			system("COLOR 0E");
 			cout << "These creatures loved the coin you had an lead you to their secret treasure, a room filled with gold, they tell you that you can take whatever you want." << endl;
 			coins += 150;
 			cout << "After they lead you over to the village so you can complete your journey." << endl;
 			room = 5;
 			break;
-		case 24:
+		case 23:
 			system("COLOR 4E");
 			cout << "You find yourself in a large space, there is a big red ring with a treasure chest in the middle." << endl;
 			cout << "This is it! The rumoured treasure of these forrests!" << endl;
-			cout << "But wait its too easy, you hear a noise..." << endl;
+			cout << "But wait its too easy, you hear a noise..." << endl << endl;
 			Bosses();
 			break;
 		}
@@ -445,13 +454,15 @@ void Shop() {
 		if (input == "p"  && coins >=20) {
 			Inventory[4] = "potion";
 			cout << "You got a potion" << endl;
+			coins -= 20;
 		}
 		else if (input == "p" && coins < 20) {
 			cout << "I'm sorry my friend you don't have enough money." << endl;
 		}
 		else if (input == "s" && coins >= 25) {
-			Inventory[5] = "sword";
+			Inventory[3] = "sword";
 			cout << "You got a sword." << endl;
+			coins -= 25;
 		}
 		else if (input == "s" && coins < 25) {
 			cout << "I'm sorry my friend you don't have enough money." << endl;
@@ -459,6 +470,7 @@ void Shop() {
 		else if (input == "hc" && coins >= 30) {
 			Inventory[0] = "heavy chestplate";
 			cout << "You got a heavy chestplate." << endl;
+			coins -= 30;
 		}
 		else if (input == "hc" && coins < 30) {
 			cout << "I'm sorry my friend you don't have enough money." << endl;
@@ -466,6 +478,7 @@ void Shop() {
 		else if (input == "hl" && coins >= 25) {
 			Inventory[1] = "heavy leggings";
 			cout << "You got heavy leggings." << endl;
+			coins -= 25;
 		}
 		else if (input == "hl" && coins < 25) {
 			cout << "I'm sorry my friend you don't have enough money." << endl;
@@ -473,6 +486,7 @@ void Shop() {
 		else if (input == "hb" && coins >= 20) {
 			Inventory[2] = "heavy boots";
 			cout << "You got heavy boots." << endl;
+			coins -= 20;
 		}
 		else if (input == "hb" && coins < 20) {
 			cout << "I'm sorry my friend you don't have enough money." << endl;
@@ -511,16 +525,18 @@ void battle(int BossHealth, char Btype) {
 		cout << "The monster hits you for " << damage << " damage" << endl;
 		health -= damage;
 		cout << "You have " << health << " health left" << endl;
-		cout << "Your turn to attack, you can swipe or kick." << endl;
+		cout << "Your turn to attack, you can swipe or kick, you can also heal with any available potion." << endl;
 		cin >> input;
-		if (Inventory[3] == "shapenedstick")
-			damage * .1;
-		else if (Inventory[3] == "sword")
-			damage * 2;
+		//if (Inventory[3] == "shapenedstick")
+		//	damage * .2;
+		//else if (Inventory[3] == "sword")
+		//	damage * 2;
 		if (input == "swipe")
 			damage = rand() % 7 + 10;
 		else if (input == "kick")
 			damage = rand() % 7 + 5;
+		else
+			cout << "You missed your shot now you're gonna get hit." << endl;
 		cout << "You hit the monster for " << damage << " damage" << endl;
 		BossHealth -= damage;
 		cout << "The Boss has " << BossHealth << " health." << endl;
@@ -532,5 +548,25 @@ void battle(int BossHealth, char Btype) {
 	else if (health <= 0) {
 		system("COLOR 4C");
 		MessageBox(nullptr, TEXT("YOU DIED"), TEXT("The Boss wasn't planning on giving up it's treasure"), MB_OK);
+	}
+}
+void NPC(int ctype) {
+	switch (ctype) {
+	case 1:
+		cout << "A very small dwarf like man walks out from behind a little hiding spot to say hi, he is very polite." << endl;
+		cout << "He gives you 5 coins for you to use on your adventure." << endl << endl;
+		coins += 5;
+		break;
+	case 2:
+		cout << "A fairy flies towards you and wants to give you some health(+10 hp)." << endl << endl;
+		health += 10;
+		break;
+	case 3:
+		cout << "A really annoying elf keeps following you around, you decide to hit him, he hits you back (-10 hp)." << endl << endl;
+		health -= 10;
+		break;
+	case 4:
+		cout << endl;
+		break;
 	}
 }
