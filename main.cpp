@@ -544,6 +544,7 @@ void battle(int BossHealth, char Btype) {
 	if (BossHealth <= 0) {
 		system("COLOR 7F");
 		MessageBox(nullptr, TEXT("YOU WON!"), TEXT("You defeated the boss and took it's treasure! Well Done!"), MB_OK);
+		return 0;
 	}
 	else if (health <= 0) {
 		system("COLOR 4C");
