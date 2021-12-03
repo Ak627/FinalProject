@@ -181,7 +181,7 @@ int main() {
 			break;
 		case 8:
 			system("COLOR 1E");
-			cout << "The villagers find your kindness very respectable\n";
+			cout << "The villagers find your kindness very honorable\n";
 			cout << "They guide you to a path to what they call Mystical Treasure\n";
 			cout << "As you go down their path you see a flower plains to the South.\n";
 			cin >> input;
@@ -198,14 +198,15 @@ int main() {
 			break;
 		case 9:
 			system("COLOR 2D");
-			cout << "You walk into a flower plain, there are many beautiful flowers.\n";
+			cout << "You walk into a flower plain, there are many beautiful and vibrant flowers.\n";
+			cout << "Each different shades of golden yellow, hot pink, beautiful lavender, and even ocean blue flowers.\n";
 			NPC(num);
-			cout << "To the East there is more fields of flowers with some objects in the distance.\n";
+			cout << "To the East there is more fields of these vibrant flowers with some faint objects in the distance.\n";
 			cin >> input;
 			if (input == "East")
 				room = 10;
 			else if (input == "North")
-				cout << "You stop as you go back through the villagers paht, you can't go back now after what they did for you.\n";
+				cout << "You stop as you go back through the villagers path, you can't go back now after what they did for you.\n";
 			else if (input == "q") {
 				MessageBox(nullptr, TEXT("YOU QUIT."), TEXT("Thanks for playing."), MB_OK);
 				return 0;
@@ -386,7 +387,8 @@ int main() {
 
 			if (input == "Y") {
 				if (Inventory[6].compare("magickey") != 0) {
-					cout << "The portal won't let you through." << endl;
+					cout << "The portal won't let you through, it looks like you need a key to get it started." << endl;
+					cout << "You see there is a small key like hole on the portal." << endl;
 					room = 14;
 				}
 				else {
@@ -404,8 +406,16 @@ int main() {
 			system("COLOR 0E");
 			cout << "These creatures loved the coin you had an lead you to their secret treasure, a room filled with gold, they tell you that you can take whatever you want." << endl;
 			coins += 150;
-			cout << "After they lead you over to the village so you can complete your journey." << endl;
-			room = 5;
+			cout << "You can Stay longer if you would like or you could Leave with the creatures." << endl;
+			cin >> input;
+			if (input == "Stay") {
+				cout << "You stay a little longer but the creatures decide it's time for you to go." << endl;
+				room = 5;
+			}
+			else if (input == "Leave") {
+				cout << "When you're done in the room the creatures lead you over to the village so you can complete your journey." << endl;
+				room = 5;
+			}
 			break;
 		case 23:
 			system("COLOR 4E");
@@ -515,15 +525,15 @@ void Bosses() {
 	int num = rand() % 100 + 1;
 	if (num <= 20) {
 		cout << "You encounter the Large Cave Orc gaurding the treasure!" << endl;
-		battle(50, 'o');
+		battle(60, 'o');
 	}
 	else if (num <= 60) {
 		cout << "You encounter the Hydra that is the keeper of the treauser!" << endl;
-		battle(65, 'h');
+		battle(75, 'h');
 	}
 	else {
 		cout << "The Cyclops of the treasure appears before you!" << endl;
-		battle(30, 'c');
+		battle(40, 'c');
 	}
 }
 
