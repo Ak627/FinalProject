@@ -4,19 +4,22 @@
 #include<string>
 using namespace std;
 
+//function declarations
 void Bosses();
 void Monsters();
 void Shop();
 void battle(int BossHealth, char Btype);
 void NPC(int ctype);
-
+//variable declarations
 int health = 100;
 int coins = 10;
 int turns = 0;
+//inventory set up
 string Inventory[10] = { "wool shirt","wool pants","animal skin shoes"};
 
 int main() {
 	srand(time(NULL));
+	//starting point and local variables
 	int room = 1;
 	int num;
 	string input;
@@ -24,27 +27,27 @@ int main() {
 	cout << "You wake up and find yourself in a mysterious forest. Can you figure out the way out? Will you find the treasure that is rumoured to be in this forest? Good luck adventurer have fun." << endl;
 	cout << "You see an opening through the trees." << endl;
 	cout << "(To quit at any point in the game enter q)\n";
-	do {
-		num = rand() % 4 + 1;
+	do {//game loop start
+		num = rand() % 4 + 1;//random number generator
 		cout << "Inventory: ";
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 10; i++)//for loop that prints out inventory slots
 			cout << Inventory[i] << " | ";
 		cout << endl;
-		cout << "Health: " << health << endl;
-		cout << "Coin Count: " << coins << endl;
-		cout << "Turns taken: " << turns << endl;
-		cout << "You have " << 50 - turns << " turns left." << endl;
+		cout << "Health: " << health << endl;//health counter
+		cout << "Coin Count: " << coins << endl;//coin counter
+		cout << "Turns taken: " << turns << endl;//turns counter
+		cout << "You have " << 50 - turns << " turns left." << endl;//subtracts from turn variable
 		turns++;
 		switch (room) {
 		case 1:
-			system("COLOR 2F");
+			system("COLOR 2F");//changes color of gamescreen and text
 			cout << "You enter the opening between the trees you see. You can head North." << endl;
 			cin >> input;
-			if (input == "North")
+			if (input == "North")//if choices that indicate choice from user input
 				room = 2;
 			else if (input == "q") {
-				MessageBox(nullptr, TEXT("YOU QUIT."), TEXT("Thanks for playing."), MB_OK);
-				return 0;
+				MessageBox(nullptr, TEXT("YOU QUIT."), TEXT("Thanks for playing."), MB_OK);//adds a text box on the screen that indicates you quit from the game
+				return 0;//stops the code from running
 			}
 			else
 				cout << "trees block the path this way" << endl;
@@ -53,9 +56,9 @@ int main() {
 			system("COLOR 2F");
 			cout << "You head North and find yourself near a pond." << endl;
 			cout << "There is a path to the West as well as a hike to the East." << endl;
-			if (Inventory[3] != "sharpenedstick") {
+			if (Inventory[3] != "sharpenedstick") {//checks inventory slots to see if you have a certain item and prints out a statement if item is not present
 				cout << "There is a sharpened stick you find on the floor, you have a feeling it might be useful. You pick it up." << endl;
-				Inventory[3] = "sharpenedstick";
+				Inventory[3] = "sharpenedstick";//adds this item to your inventory slot
 			}
 			cin >> input;
 			if (input == "West")
@@ -135,13 +138,13 @@ int main() {
 			cout << "The creatures seem very interested in you, would you like to Stay or keep heading East?" << endl;
 			cin >> input;
 			if (input == "Stay") {
-				if (Inventory[5].compare("small coin") != 0) {
+				if (Inventory[5].compare("small coin") != 0) {//if you don't have this item you die or lose game
 					system("COLOR 48");
 					MessageBox(nullptr, TEXT("YOU DIED."), TEXT("The creatures were hungry and didn't want their meal leaving."), MB_OK);
 					return 0;
 				}
 				else
-					room = 22;
+					room = 22;//if you have this item you will be taken to another room
 			}
 			else if (input == "East")
 				room = 11;
@@ -196,7 +199,7 @@ int main() {
 			system("COLOR 2D");
 			cout << "You walk into a flower plain, there are many beautiful and vibrant flowers.\n";
 			cout << "Each different shades of golden yellow, hot pink, beautiful lavender, and even ocean blue flowers.\n";
-			NPC(num);
+			NPC(num);//NPC call with the random number generator as the argument to randomly call a different NPC
 			cout << "To the East there is more fields of these vibrant flowers with some faint objects in the distance.\n";
 			cin >> input;
 			if (input == "East")
@@ -274,8 +277,8 @@ int main() {
 			cout << "You walk across the docks and find yourself at a small shop.\n";
 			cout << "Would you like to enter Y/N?\n";
 			cin >> input;
-			if (input == "Y")
-				Shop();
+			if (input == "Y")//type in a certain letter, phrase, or number to enter the shop function
+				Shop();//shop function call based on user input
 			else if (input == "N")
 				room = 12;
 			else if (input == "q") {
@@ -287,7 +290,7 @@ int main() {
 			break;
 		case 14:
 			system("COLOR 0F");
-			Monsters();
+			Monsters();//monster function called when you enter certain rooms
 			cout << "You go to another path in the cave, there is an opening outside to the West and a path back North.\n";
 			cout << "A strange purple light seeps through from the West.\n";
 			cin >> input;
@@ -410,7 +413,7 @@ int main() {
 		case 22:
 			system("COLOR 0E");
 			cout << "These creatures loved the coin you had an lead you to their secret treasure, a room filled with gold, they tell you that you can take whatever you want." << endl;
-			coins += 150;
+			coins += 150;//adds more values to your money variable
 			cout << "You can Stay longer if you would like or you could Leave with the creatures." << endl;
 			cin >> input;
 			if (input == "Stay") {
@@ -427,16 +430,16 @@ int main() {
 			cout << "You find yourself in a large space, there is a big red ring with a glowing gold treasure chest in the middle." << endl;
 			cout << "This is finally it! The rumoured treasure of these forests!" << endl;
 			cout << "But wait its too easy, you hear a noise and feel a rumble beneath your feet..." << endl << endl;
-			Bosses();
+			Bosses();//calls the function for bosses
 			room = 24;
 			break;
 		case 24:
 			system("COLOR 7F");
-			MessageBox(nullptr, TEXT("YOU WON!"), TEXT("You defeated the boss and took it's treasure! Well Done!"), MB_OK);
-			return 0;
+			MessageBox(nullptr, TEXT("YOU WON!"), TEXT("You defeated the boss and took it's treasure! Well Done!"), MB_OK);//a text box that's printed out to the screen to tell the user they won the game
+			return 0;//stops code running
 		}
-	} while (input != "q" && turns < 50 && health > 0);
-	if (turns == 50) {
+	} while (input != "q" && turns < 50 && health > 0);//ends game loop based on user input and variable numbers
+	if (turns == 50) {//if statments that print out a losing condition based on how you lose(running out of turns, losing all health)
 		system("COLOR 48");
 		MessageBox(nullptr, TEXT("YOU DIED."), TEXT("You starved to death in the harsh wilderness."), MB_OK);
 		return 0;
@@ -447,17 +450,18 @@ int main() {
 		return 0;
 	}
 }
+//function definitions
 void Monsters() {
-	int num = rand() % 100 + 1;
-	int healthsub = rand() % 20 +1;
-	if (num <= 40) {
+	int num = rand() % 100 + 1;//random number generator to generate random monsters
+	int healthsub = rand() % 20 +1;//random number generator to generate random damage
+	if (num <= 40) {//if statements that will generate a monster bsaed on the number that is randomly generated
 		cout << "A frail skeleton appears and smacks you!" << endl;
-		health -= 10;
+		health -= 10;//subtracts 10 health points from health variable
 		cout << "You get hit for 10 hp." << endl << endl;
 	}
 	else if (num <= 75) {
 		cout << "a zombie appears and bites you at an attempt to eat your brains!" << endl;
-		health -= healthsub;
+		health -= healthsub;//subtracts health based on the random number generated
 		cout << "You get hit for " << healthsub << " hp." << endl << endl;
 	}
 	else if (num <= 90) {
@@ -467,8 +471,8 @@ void Monsters() {
 	}
 	else if (num <= 95) {
 		cout << "A group of cave fairies give you some coins and heal you by 50 hp." << endl;
-		coins += 25;
-		health += 50;
+		coins += 25;//adds 25 coins to the coin count
+		health += 50;//adds 50 health points to health
 		cout << "They wish you good luck on your adventure." << endl << endl;
 	}
 	else
@@ -480,13 +484,13 @@ void Shop() {
 	do {
 		cout << "Coins: " << coins << endl;
 		cout << "Enter 'p' for a potion for 20 coins, 's' for a sword for 25 coins, 'hc' for heavy chestplate for 30 coins, 'hl' for heavy leggings for 25 coins, 'hb' for heavy boots for 20 coins. To exit the shop press 'q'." << endl;
-		cin >> input;
-		if (input == "p"  && coins >=20) {
-			Inventory[4] = "potion";
+		cin >> input;//input that takes in input to buy items form shop
+		if (input == "p"  && coins >=20) {//checks to see if user has a sufficient amount of money to buy this item
+			Inventory[4] = "potion";//if money is sufficient the user will get an item in their inventory array
 			cout << "You got a potion" << endl;
-			coins -= 20;
+			coins -= 20;//subtracts 20 coins from coin count
 		}
-		else if (input == "p" && coins < 20) {
+		else if (input == "p" && coins < 20) {//if money is insufficient user will be told they cannot buy this item and will need to get more coins
 			cout << "I'm sorry my friend you don't have enough money." << endl;
 		}
 		else if (input == "s" && coins >= 25) {
@@ -527,10 +531,10 @@ void Shop() {
 }
 
 void Bosses() {
-	int num = rand() % 100 + 1;
+	int num = rand() % 100 + 1;//random number like the monster generator to randomly generate a boss
 	if (num <= 20) {
 		cout << "You encounter the Large Cave Orc gaurding the treasure!" << endl;
-		battle(75, 'o');
+		battle(75, 'o');//arguments for the battle system(health and boss type)
 	}
 	else if (num <= 60) {
 		cout << "You encounter the Hydra that is the keeper of the treauser!" << endl;
@@ -543,54 +547,54 @@ void Bosses() {
 }
 
 void battle(int BossHealth, char Btype) {
-	int damage;
-	int monsterdamage;
-	string input;
+	int damage;//damage variable for player
+	int monsterdamage;//damage variable for boss/monster
+	string input;//input for battle choice
 	while (BossHealth > 0 && health > 0) {
-		if (Btype == 'h')
-			monsterdamage = rand() % 31 + 20;
+		if (Btype == 'h')//based on monster type there will be different damages to the player
+			monsterdamage = rand() % 31 + 20;//random number generator for boss damage
 		else if (Btype == 'o')
 			monsterdamage = rand() % 21 + 20;
 		else
 			monsterdamage = rand() % 16 + 20;
 		cout << "The monster hits you for " << monsterdamage << " damage" << endl;
-		health -= monsterdamage;
-		cout << "You have " << health << " health left" << endl;
+		health -= monsterdamage;//subtracts health based on monster damage generated 
+		cout << "You have " << health << " health left" << endl;//tells user how much damage they got hit by
 		cout << "Your turn to attack, you can swipe or kick, you can also heal with any available potion." << endl;
 		cin >> input;
-		if (Inventory[3] == "shapenedstick")
-			damage * .2;
+		if (Inventory[3] == "shapenedstick")//damage multiplier based on what user has
+			damage * .5;
 		else if (Inventory[3] == "sword")
-			damage * 1.5;
-		if (input == "swipe")
-			damage = rand() % 7 + 10;
+			damage * 2;
+		if (input == "swipe")//input thast damages the enemy based on what you type in
+			damage = rand() % 7 + 10;//random number generator for the damage inflicted on the boss
 		else if (input == "kick")
 			damage = rand() % 7 + 5;
 		else
 			cout << "You missed your shot now you're gonna get hit." << endl;
-		cout << "You hit the monster for " << monsterdamage << " damage" << endl;
-		BossHealth -= monsterdamage;
+		cout << "You hit the monster for " << damage << " damage" << endl;
+		BossHealth -= damage;//damage that subracts from the monsters health
 		cout << "The Boss has " << BossHealth << " health." << endl;
 	}
-	if (health <= 0) {
+	if (health <= 0) {//ends the loop if you run out of health
 		system("COLOR 4C");
 		MessageBox(nullptr, TEXT("YOU DIED"), TEXT("The Boss wasn't planning on giving up it's treasure"), MB_OK);
 	}
 }
-void NPC(int ctype) {
-	switch (ctype) {
-	case 1:
+void NPC(int ctype) {//npc generator
+	switch (ctype) {//chooses cases based on the argument called in main for the parameters
+	case 1://cases like rooms for int main that print out a certain NPC
 		cout << "A very small dwarf like man walks out from behind a little hiding spot to say hi, he is very polite." << endl;
 		cout << "He gives you 5 coins for you to use on your adventure." << endl << endl;
-		coins += 5;
+		coins += 5;//Adds 5 coins to your coin count
 		break;
 	case 2:
 		cout << "A fairy flies towards you and wants to give you some health(+10 hp)." << endl << endl;
-		health += 10;
+		health += 10;//Adds 10 health points to the health
 		break;
 	case 3:
 		cout << "A really annoying elf keeps following you around, you decide to hit him, he hits you back (-10 hp)." << endl << endl;
-		health -= 10;
+		health -= 10;//Subtracts 10 health points from health
 		break;
 	case 4:
 		cout << endl;
