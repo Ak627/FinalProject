@@ -93,7 +93,7 @@ int main() {
 			cout << "You head East and hike up a small mountain that goes above the tree tops." << endl;
 			cout << "While standing on the mountain you see village further South as well as a light more to the East." << endl;
 			cin >> input;
-			 if (input == "South")
+			if (input == "South")
 				room = 5;
 			else if (input == "East")
 				room = 6;
@@ -156,13 +156,9 @@ int main() {
 			break;
 		case 7:
 			system("COLOR 0F");
-			cout << "You enter the cave it is dark and cold.\n";
-			cout << "There are three different paths North, South, and West.\n";
+			cout << "You enter the cave it is very cold with little to no visibility.\n";
+			cout << "There are three different visbile paths North, South, and West. You can also exit outside of the cave going East.\n";
 			cout << "Which way shall you go?\n";
-			if (Inventory[6] != "magickey") {
-				cout << "You see a Magical Key on the floor, you decide it might be a good idea to pick it up." << endl << endl;
-				Inventory[6] = "magickey";
-			}
 			cin >> input;
 			if (input == "North")
 				room = 17;
@@ -220,8 +216,14 @@ int main() {
 			NPC(num);
 			cout << "You see a path South, West, and further East.\n";
 			cin >> input;
-			if (input == "South")
-				room = 23;
+			if (input == "South") {
+				if (Inventory[3].compare("sword") != 0) {
+					cout << "You think about entering this area but you feel a presence you have never felt before." << endl;
+					cout << "You feel it should be better to grab a weapon, like a sword, to continue your quest." << endl;
+				}
+				else
+					room = 23;
+			}
 			else if (input == "East")
 				room = 12;
 			else if (input == "West")
@@ -235,7 +237,11 @@ int main() {
 			break;
 		case 11:
 			system("COLOR 2F");
-			cout << "You move past the fountain, there is a path South and West.\n";
+			cout << "You move past the fountain into the thick forest ahead, there is a small open path South and the fountain back West.\n";
+			if (Inventory[6] != "magickey") {
+				cout << "You see a Magical looking Key on the floor, you decide it might be a good idea to pick it up." << endl << endl;
+				Inventory[6] = "magickey";
+			}
 			cin >> input;
 			if (input == "South")
 				room = 20;
@@ -282,8 +288,8 @@ int main() {
 		case 14:
 			system("COLOR 0F");
 			Monsters();
-			cout << "You go South, there is an opening to the West and a path back North.\n";
-			cout << "A strange light seeps through from the West.\n";
+			cout << "You go to another path in the cave, there is an opening outside to the West and a path back North.\n";
+			cout << "A strange purple light seeps through from the West.\n";
 			cin >> input;
 			if (input == "West")
 				room = 21;
@@ -299,7 +305,7 @@ int main() {
 		case 15:
 			system("COLOR 0F");
 			Monsters();
-			cout << "You head West, there is an path North, East, and West." << endl;
+			cout << "You head down another cold path, it's almost like you are in a maze, there is an path North, East, and West." << endl;
 			cin >> input;
 			if (input == "West")
 				room = 16;
@@ -313,7 +319,7 @@ int main() {
 		case 16:
 			system("COLOR 0F");
 			Monsters();
-			cout << "You head West, there is an path North, and East." << endl;
+			cout << "You head down another path in the cave, there is an path North, and East." << endl;
 			cin >> input;
 			if (input == "North")
 				room = 19;
@@ -326,7 +332,7 @@ int main() {
 		case 17:
 			system("COLOR 0F");
 			Monsters();
-			cout << "You head North, There is a path South and West." << endl;
+			cout << "You head towards a darker path of the cave, There are open paths South and West." << endl;
 			cin >> input;
 			if (input == "South")
 				room = 7;
@@ -338,7 +344,7 @@ int main() {
 		case 18:
 			system("COLOR 0F");
 			Monsters();
-			cout << "You head down another path in the cave, there is an path South, East, and West." << endl;
+			cout << "You head down another eerie path in the cave, there are different paths South, East, and West." << endl;
 			cin >> input;
 			if (input == "West")
 				room = 19;
@@ -347,7 +353,7 @@ int main() {
 			else if (input == "East")
 				room = 17;
 			else
-				cout << "It's cold and dark, nothing happens.\n";
+				cout << "It's cold and dark, nothing happens." << endl;
 			break;
 		case 19:
 			system("COLOR 0F");
@@ -382,9 +388,8 @@ int main() {
 			break;
 		case 21:
 			cout << "You go towards the light, you are on top of the cave." << endl;
-			cout << "You see the source of the light coming from a strange doorway. Would you like to enter? Y/N" << endl;
+			cout << "You see the source of the bright purple light coming from a strange doorway. Would you like to enter? Y/N" << endl;
 			cin >> input;
-
 			if (input == "Y") {
 				if (Inventory[6].compare("magickey") != 0) {
 					cout << "The portal won't let you through, it looks like you need a key to get it started." << endl;
@@ -419,9 +424,9 @@ int main() {
 			break;
 		case 23:
 			system("COLOR 4E");
-			cout << "You find yourself in a large space, there is a big red ring with a treasure chest in the middle." << endl;
-			cout << "This is it! The rumoured treasure of these forrests!" << endl;
-			cout << "But wait its too easy, you hear a noise..." << endl << endl;
+			cout << "You find yourself in a large space, there is a big red ring with a glowing gold treasure chest in the middle." << endl;
+			cout << "This is finally it! The rumoured treasure of these forests!" << endl;
+			cout << "But wait its too easy, you hear a noise and feel a rumble beneath your feet..." << endl << endl;
 			Bosses();
 			room = 24;
 			break;
@@ -525,15 +530,15 @@ void Bosses() {
 	int num = rand() % 100 + 1;
 	if (num <= 20) {
 		cout << "You encounter the Large Cave Orc gaurding the treasure!" << endl;
-		battle(60, 'o');
+		battle(75, 'o');
 	}
 	else if (num <= 60) {
 		cout << "You encounter the Hydra that is the keeper of the treauser!" << endl;
-		battle(75, 'h');
+		battle(110, 'h');
 	}
 	else {
 		cout << "The Cyclops of the treasure appears before you!" << endl;
-		battle(40, 'c');
+		battle(60, 'c');
 	}
 }
 
