@@ -569,17 +569,22 @@ void battle(int BossHealth, char Btype) {
 		else if (Inventory[3] == "sword")
 			damage * 2.5;
 		cin >> input;
-		if (input == "swipe")//input thast damages the enemy based on what you type in
-			damage = rand() % 12 + 10;//random number generator for the damage inflicted on the boss/enemy npc
-		else if (input == "kick")
-			damage = rand() % 10 + 5;
+		if (input == "swipe") {//input thast damages the enemy based on what you type in
+			damage = rand() % 15 + 10;//random number generator for the damage inflicted on the boss/enemy npc
+			cout << "You hit the monster for " << damage << " damage" << endl;
+			BossHealth -= damage;//damage that subracts from the monsters health
+			cout << "The Boss has " << BossHealth << " health." << endl;
+		}
+		else if (input == "kick") {
+			damage = rand() % 12 + 5;
+			cout << "You hit the monster for " << damage << " damage" << endl;
+			BossHealth -= damage;//damage that subracts from the monsters health
+			cout << "The Boss has " << BossHealth << " health." << endl;
+		}
 		else if (input == "p")
 			health += 15;
 		else
 			cout << "You missed your shot now you're gonna get hit." << endl;
-		cout << "You hit the monster for " << damage << " damage" << endl;
-		BossHealth -= damage;//damage that subracts from the monsters health
-		cout << "The Boss has " << BossHealth << " health." << endl;
 	}
 	if (health <= 0) {//ends the loop if you run out of health
 		system("COLOR 4C");
