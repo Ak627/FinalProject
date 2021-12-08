@@ -603,7 +603,7 @@ void NPC(int ctype) {//npc generator
 		health += 10;//Adds 10 health points to the health
 		break;
 	case 3:
-		cout << "A really annoying elf keeps following you around, you decide to hit him, he hits you back (-10 hp)." << endl << endl;
+		cout << "A really annoying elf keeps following you around, you decide to push him away, he hits you as a result (-10 hp)." << endl << endl;
 		health -= 10;//Subtracts 10 health points from health
 		break;
 	case 4:
