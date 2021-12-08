@@ -181,8 +181,8 @@ int main() {
 		case 8:
 			system("COLOR 1E");
 			cout << "The villagers find your kindness very honorable\n";
-			cout << "They guide you to a path to what they call Mystical Treasure\n";
-			cout << "As you go down their path you see a flower plains to the South.\n";
+			cout << "They guide you to a path to what they call Mystical Treasure. But they warn yuou of creatures you may possibly encounter.\n";
+			cout << "As you go down their path you see a beautiful flower plains with the sun accenting it with an elegant golden glow to the South.\n";
 			cin >> input;
 			if (input == "South")
 				room = 9;
@@ -505,6 +505,7 @@ void Shop() {
 			Inventory[0] = "heavy chestplate";
 			cout << "You got a heavy chestplate." << endl;
 			coins -= 30;
+			health += 15;
 		}
 		else if (input == "hc" && coins < 30) {
 			cout << "I'm sorry my friend you don't have enough money." << endl;
@@ -513,6 +514,7 @@ void Shop() {
 			Inventory[1] = "heavy leggings";
 			cout << "You got heavy leggings." << endl;
 			coins -= 25;
+			health += 10;
 		}
 		else if (input == "hl" && coins < 25) {
 			cout << "I'm sorry my friend you don't have enough money." << endl;
@@ -521,6 +523,7 @@ void Shop() {
 			Inventory[2] = "heavy boots";
 			cout << "You got heavy boots." << endl;
 			coins -= 20;
+			health += 5;
 		}
 		else if (input == "hb" && coins < 20) {
 			cout << "I'm sorry my friend you don't have enough money." << endl;
@@ -560,16 +563,18 @@ void battle(int BossHealth, char Btype) {
 		cout << "The monster hits you for " << monsterdamage << " damage" << endl;
 		health -= monsterdamage;//subtracts health based on monster damage generated 
 		cout << "You have " << health << " health left" << endl;//tells user how much damage they got hit by
-		cout << "Your turn to attack, you can swipe or kick, you can also heal with any available potion." << endl;
-		cin >> input;
-		if (Inventory[3] == "shapenedstick")//damage multiplier based on what user has
-			damage * .5;
+		cout << "Your turn to attack, you can swipe or kick the big creature, you can also heal with any available potion(p)." << endl;
+		if (Inventory[3] == "shapenedstick")//damage multiplier based on what item the user has
+			damage * 1.2;
 		else if (Inventory[3] == "sword")
-			damage * 2;
+			damage * 2.5;
+		cin >> input;
 		if (input == "swipe")//input thast damages the enemy based on what you type in
-			damage = rand() % 7 + 10;//random number generator for the damage inflicted on the boss
+			damage = rand() % 12 + 10;//random number generator for the damage inflicted on the boss/enemy npc
 		else if (input == "kick")
-			damage = rand() % 7 + 5;
+			damage = rand() % 10 + 5;
+		else if (input == "p")
+			health += 15;
 		else
 			cout << "You missed your shot now you're gonna get hit." << endl;
 		cout << "You hit the monster for " << damage << " damage" << endl;
