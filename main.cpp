@@ -550,7 +550,7 @@ void Bosses() {
 }
 
 void battle(int BossHealth, char Btype) {
-	int damage;//damage variable for player
+	int damage = 10;//damage variable for player
 	int monsterdamage;//damage variable for boss/monster
 	string input;//input for battle choice
 	while (BossHealth > 0 && health > 0) {
@@ -570,13 +570,13 @@ void battle(int BossHealth, char Btype) {
 			damage * 2.5;
 		cin >> input;
 		if (input == "swipe") {//input thast damages the enemy based on what you type in
-			damage = rand() % 15 + 10;//random number generator for the damage inflicted on the boss/enemy npc
+			damage += rand() % 15 + 10;//random number generator for the damage inflicted on the boss/enemy npc
 			cout << "You hit the monster for " << damage << " damage" << endl;
 			BossHealth -= damage;//damage that subracts from the monsters health
 			cout << "The Boss has " << BossHealth << " health." << endl;
 		}
 		else if (input == "kick") {
-			damage = rand() % 12 + 5;
+			damage += rand() % 12 + 5;
 			cout << "You hit the monster for " << damage << " damage" << endl;
 			BossHealth -= damage;//damage that subracts from the monsters health
 			cout << "The Boss has " << BossHealth << " health." << endl;
