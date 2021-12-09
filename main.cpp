@@ -565,9 +565,9 @@ void battle(int BossHealth, char Btype) {
 		cout << "You have " << health << " health left" << endl;//tells user how much damage they got hit by
 		cout << "Your turn to attack, you can swipe or kick the big creature, you can also heal with any available potion(p)." << endl;
 		if (Inventory[3] == "shapenedstick")//damage multiplier based on what item the user has
-			damage * 1.2;
+			damage += 2;
 		else if (Inventory[3] == "sword")
-			damage * 2.5;
+			damage * 5;
 		cin >> input;
 		if (input == "swipe") {//input thast damages the enemy based on what you type in
 			damage += rand() % 15 + 10;//random number generator for the damage inflicted on the boss/enemy npc
