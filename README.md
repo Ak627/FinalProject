@@ -1,6 +1,6 @@
 # The Lost Adventurer
-	    You live in the land of Ascana as a lonely adventurer, you try and make 
-  riches but have struggled to make a good living, although there may be a new 
+	    You live in the land of Ascana as a lonely adventurer
+  You try and make riches but have struggled to make a good living, although there may be a new 
   chance for you. You have heard tales about a treasure from many different
   people and creatures, all have dreamed to one day find the treasure but no one 
   has ever found it. Those who have seen it have never made it out alive to tell the 
