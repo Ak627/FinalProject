@@ -434,7 +434,16 @@ int main() {
 			room = 24;
 			break;
 		case 24:
-			system("COLOR 7F");
+			system("COLOR 70");
+			cout << "     ____________" << endl;//ASCII art for the treasure chest you win at the end of the game
+			cout <<"    / \\____;; ___\\" << endl;
+			cout << "   | /         /" << endl;
+			cout << "   `. ())oo() ." << endl;
+			cout << "   |\\(%()*^^()^\\" << endl;
+			cout << "   | |-% ------ |" << endl;
+			cout << "   \\ | %))      |" << endl;
+			cout << "    \\| % ______ |" << endl;
+			cout << "The Lost Treasure of Ascana" << endl;
 			MessageBox(nullptr, TEXT("YOU WON!"), TEXT("You defeated the boss and took it's treasure! Well Done!"), MB_OK);//a text box that's printed out to the screen to tell the user they won the game
 			return 0;//stops code running
 		}
