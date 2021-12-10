@@ -381,7 +381,7 @@ int main() {
 			cin >> input;
 			if (input == "East") {
 				system("COLOR 48");
-				MessageBox(nullptr, TEXT("YOU DIED."), TEXT("You ran through the trees too fast and didn't realize the big crater in the ground."), MB_OK);
+				MessageBox(nullptr, TEXT("YOU DIED."), TEXT("You ran through the trees too fast and fell in a hole."), MB_OK);
 				return 0;
 			}
 			else if (input == "North")
