@@ -16,7 +16,7 @@ int coins = 10;
 int turns = 0;
 //inventory set up
 string Inventory[10] = { "wool shirt","wool pants","animal skin shoes"};
-
+//main game loop 
 int main() {
 	srand(time(NULL));
 	//starting point and local variables
@@ -447,7 +447,7 @@ int main() {
 			MessageBox(nullptr, TEXT("YOU WON!"), TEXT("You defeated the boss and took it's treasure! Well Done!"), MB_OK);//a text box that's printed out to the screen to tell the user they won the game
 			return 0;//stops code running
 		}
-	} while (input != "q" && turns < 50 && health > 0);//ends game loop based on user input and variable numbers
+	} while (input != "q" && turns < 50 && health > 0);//ends game loop based on user input and/or variable numbers
 	if (turns == 50) {//if statments that print out a losing condition based on how you lose(running out of turns, losing all health)
 		system("COLOR 48");
 		MessageBox(nullptr, TEXT("YOU DIED."), TEXT("You starved to death in the harsh wilderness."), MB_OK);
